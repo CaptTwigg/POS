@@ -1,0 +1,41 @@
+GUI {
+    background-color: qlineargradient(x1:0,
+    y1: 0,
+    x2: 0,
+    y2: 1,
+    stop: 0 rgb(91, 91, 91),
+    stop: 1 rgb(57, 57, 57));
+
+}
+
+.QPushButton {
+    background-color: rgb(55, 55, 55);
+    color: white;
+    border: 0;
+    padding: 50px;
+}
+
+ MainController #purchaseView QPushButton:pressed {
+    background-color: #000063;
+     width: 1000%;
+}
+
+
+MainController #purchaseView QLineEdit {
+    border: 0;
+    background-color: rgba(91, 91, 91, 0);
+    color: white;
+    font-size: 40px;
+
+
+}
+
+MainController #purchaseView #Enter {
+
+    padding-bottom: 110%;
+    padding-top: 110%;
+
+}
+
+
+
