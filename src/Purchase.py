@@ -1,5 +1,8 @@
-from PyQt5.QtCore import Qt
-from PyQt5.QtWidgets import QWidget, QGridLayout, QPushButton, QLineEdit
+import sys
+
+from PyQt5.QtCore import Qt, QRegularExpression
+from PyQt5.QtGui import *
+from PyQt5.QtWidgets import QWidget, QGridLayout, QPushButton, QLineEdit, QSizePolicy, QApplication
 
 
 class Purchase(QWidget):
@@ -8,21 +11,40 @@ class Purchase(QWidget):
         self.setObjectName("purchaseView")
         # self.setStyleSheet("background-color: blue")
         self.layout = QGridLayout()
+        self.setLayout(self.layout)
 
+        # button
+        ######
         self.display = QLineEdit()
         self.display.setReadOnly(True)
-        self.display.setText(str(0))
+        self.display.setPlaceholderText("0")
         self.display.setAlignment(Qt.AlignRight)
+        self.display.setValidator(QDoubleValidator())
 
         self.numbers = [QPushButton(str(i)) for i in range(10)]
+        for num in self.numbers:
+            num.pressed.connect(lambda text=num.text(): self.appendToDisplay(text))
+
         self.delete = QPushButton("&C")
+        self.delete.pressed.connect(self.clearDisplay)
+
         self.multiply = QPushButton("X")
+        self.multiply.pressed.connect(lambda: self.appendToDisplay("*"))
+
         self.enter = QPushButton("Enter")
         self.enter.setObjectName("Enter")
-        self.dot = QPushButton(".")
-        self.minus = QPushButton("-")
+        self.enter.pressed.connect(self.calculateDisplay)
+        self.enter.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
 
-        #Layout
+        self.dot = QPushButton(".")
+        self.dot.pressed.connect(lambda: self.appendToDisplay(self.dot.text()))
+
+        self.minus = QPushButton("-")
+        self.minus.pressed.connect(lambda: self.appendToDisplay(self.minus.text()))
+
+        ######
+
+        # Layout
         self.layout.addWidget(self.display, 0, 0, 1, 5)
 
         self.layout.addWidget(self.numbers[7], 1, 0)
@@ -40,9 +62,24 @@ class Purchase(QWidget):
         self.layout.addWidget(self.numbers[3], 3, 2)
         self.layout.addWidget(self.enter, 3, 3, 2, 2)
 
-
         self.layout.addWidget(self.numbers[0], 4, 0)
         self.layout.addWidget(self.dot, 4, 1)
         self.layout.addWidget(self.minus, 4, 2)
 
-        self.setLayout(self.layout)
+    def appendToDisplay(self, text):
+        self.display.setText(self.display.text() + text)
+
+    def clearDisplay(self):
+        self.display.clear()
+
+    def calculateDisplay(self):
+        if self.display.text():
+            result = eval(self.display.text())
+            self.display.setText(f"{result:.2f}")
+
+
+if __name__ == '__main__':
+    app = QApplication(sys.argv)
+    ex = Purchase()
+    ex.show()
+    sys.exit(app.exec_())
