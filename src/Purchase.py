@@ -2,7 +2,8 @@ import sys
 
 from PyQt5.QtCore import Qt, QRegularExpression
 from PyQt5.QtGui import *
-from PyQt5.QtWidgets import QWidget, QGridLayout, QPushButton, QLineEdit, QSizePolicy, QApplication
+from PyQt5.QtWidgets import QWidget, QGridLayout, QPushButton, QLineEdit, QSizePolicy, QApplication, QStyle, \
+    QStyleOption
 
 
 class Purchase(QWidget):
@@ -74,8 +75,20 @@ class Purchase(QWidget):
 
     def calculateDisplay(self):
         if self.display.text():
-            result = eval(self.display.text())
-            self.display.setText(f"{result:.2f}")
+            try:
+                result = eval(self.display.text())
+                self.display.setText(f"{result:.2f}")
+            except Exception as e:
+                print("Calculation not possible")
+                print(e)
+
+    def paintEvent(self, event):
+        "Reimplementation of paintEvent to allow for style sheets"
+        opt = QStyleOption()
+        opt.initFrom(self)
+        painter = QPainter(self)
+        self.style().drawPrimitive(QStyle.PE_Widget, opt, painter, self)
+        painter.end()
 
 
 if __name__ == '__main__':

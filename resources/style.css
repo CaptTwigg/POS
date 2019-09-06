@@ -1,4 +1,9 @@
-GUI {
+
+/*############*/
+/*Purchase css*/
+/*############*/
+
+MainController #purchaseView {
     background-color: qlineargradient(x1:0,
     y1: 0,
     x2: 0,
@@ -8,17 +13,17 @@ GUI {
     border: 0;
 
 }
-/*############*/
-/*Purchase css*/
-/*############*/
 
 MainController #purchaseView QPushButton {
     background-color: rgba(44, 44, 44, 150);
     color: white;
     border: 0;
-    width: 60px;
-    height: 60px;
+    min-width: 60px;
+    min-height: 60px;
     font-size: 30px;
+}
+MainController #purchaseView #Enter{
+    min-width: 120px;
 }
 
 MainController #purchaseView QPushButton:pressed {
@@ -38,5 +43,127 @@ MainController  QLineEdit {
 /*Menu css */
 /*#########*/
 
+MainController #Menu  {
+    background-color: lightgray;
+
+}
+
+MainController #Menu QPushButton {
+    background-color: rgb(11, 239, 0);
+    color: white;
+    border: 0;
+    min-width: 130px;
+    min-height: 60px;
+    font-size: 25px;
+}
+
+MainController #Menu QPushButton:pressed {
+    background-color: rgb(11, 255, 0);
+    width: 1000%;
+}
+
+/*
+Tabs
+*/
+
+MainController #Tabs  {
+    background-color: lightgray;
+
+}
+MainController #Tabs QPushButton {
+    background-color: rgb(11, 239, 0);
+    color: white;
+    border: 0;
+    min-width: 130px;
+    min-height: 60px;
+    font-size: 25px;
+}
+
+MainController #Tabs QPushButton:pressed {
+    background-color: rgb(11, 255, 0);
+    width: 1000%;
+}
+
+
+/*
+Tab widget
+*/
+
+QTabWidget::pane {
+    border: 0px solid black;
+    background: white;
+}
+
+
+
+QTabBar::tab {
+    border: 0px solid black;
+}
+
+QTabBar::tab:selected {
+    background: white;
+}
+
+QTabBar::tab:!selected {
+    background: silver;
+}
+
+QTabBar::tab:!selected:hover {
+    background: #999;
+}
+
+QTabBar::tab:top:!selected {
+    margin-top: 3px;
+}
+
+QTabBar::tab:bottom:!selected {
+    margin-bottom: 3px;
+}
+
+QTabBar::tab:top, QTabBar::tab:bottom {
+    min-width: 8ex;
+    margin-right: -1px;
+    padding: 5px 10px 5px 10px;
+}
+
+QTabBar::tab:top:selected {
+    border-bottom-color: none;
+}
+
+QTabBar::tab:bottom:selected {
+    border-top-color: none;
+}
+
+QTabBar::tab:top:last, QTabBar::tab:bottom:last,
+QTabBar::tab:top:only-one, QTabBar::tab:bottom:only-one {
+    margin-right: 0;
+}
+
+QTabBar::tab:left:!selected {
+    margin-right: 3px;
+}
+
+QTabBar::tab:right:!selected {
+    margin-left: 3px;
+}
+
+QTabBar::tab:left, QTabBar::tab:right {
+    min-height: 8ex;
+    margin-bottom: -1px;
+    padding: 10px 5px 10px 5px;
+}
+
+QTabBar::tab:left:selected {
+    border-left-color: none;
+}
+
+QTabBar::tab:right:selected {
+    border-right-color: none;
+}
+
+QTabBar::tab:left:last, QTabBar::tab:right:last,
+QTabBar::tab:left:only-one, QTabBar::tab:right:only-one {
+    margin-bottom: 0;
+}
 
 
